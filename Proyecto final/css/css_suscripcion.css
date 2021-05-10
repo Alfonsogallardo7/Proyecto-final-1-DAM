@@ -1,0 +1,29 @@
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700&display=swap');
+        
+        
+        .rojo{
+            color: #DB7558;
+        }
+
+        .amarillo{
+            color: #FFCF57;
+        }
+
+        .azul{
+            color: #8FCDD4;
+        }
+
+        .celeste{
+            color: #ACD8CB;
+        }
+
+        .rosa{
+            color: #F6A6B6;
+        }
+
+        nav p{
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 25pt;
+            letter-spacing: 1.5pt;
+            
+        }
