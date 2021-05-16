@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="css-tabla.css">
+</head>
+<body>
+    <div class="container contact">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="contact-info">
+                    <img src="descarga.png" alt="image" class="col-xl-12 col-3 us"/>
+                    <h3>Lista de Competidores</h3>
+                    <h6>Asociación Española de Powerlifting</h6>
+                </div>
+            </div>
+            <div class="col-md-9">
+                <table class="table table-light">
+                    <thead class="thead-light">
+                      <tr>
+                        <th>id</th>
+                        <th>Nombre</th>
+                        <th>Apellidos</th>
+                        <th>Fecha Nacimiento</th>
+                        <th>Peso Actual</th>
+                        <th>Categoría de Peso</th>
+                        <th>Sexo</th>
+                        <th>Competición</th>
+                        <th>Squat</th>
+                        <th>BenchPress</th>
+                        <th>Deadlift</th>
+                        <th>Total</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr th:each="alumno : ${alumnos}">
+                        <td>
+                            <a th:href="@{/alumnos/{id}(id=${alumno.id})}">Ver detalle</a>
+                        </td>
+                        <td th:text="${alumno.nombre}">Luismi</td>
+                        <td th:text="${alumno.apellidos}">De Triana</td>
+                        <td th:text="${alumno.curso.nombre}">1º DAM</td>
+                      </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
