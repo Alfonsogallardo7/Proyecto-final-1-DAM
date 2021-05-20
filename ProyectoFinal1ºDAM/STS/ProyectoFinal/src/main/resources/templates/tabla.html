@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../static/css/css-tabla.css" th:href= "@{/css/css-tabla.css}" />
+</head>
+<body>
+    <div class="container contact">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="contact-info">
+                    <img src="../static/img/descarga.png" th:src="@{/img/descarga.png}" alt="image" class="col-xl-12 col-3 us"/>
+                    <h3>Lista de Competidores</h3>
+                    <h6>Asociación Española de Powerlifting</h6>
+                </div>
+            </div>
+            <div class="col-md-9">
+                <div class="form-group">        
+                    <div class="col-sm-offset-2 col-sm-10">
+                      <a href="../templates/formulario.html" th:href="@{/competidor/nuevo}"><button type="submit"  class="btn btn-info">Nuevo +</button></a>
+                    </div>
+                    
+                    <div class="col-sm-offset-2 col-sm-10">
+                      <a href="../templates/index.html" th:href="@{/}"><button type="submit"  class="btn btn-info">Volver</button></a>
+                    </div>
+                </div>
+                <table class="table table-light">
+                    <thead class="thead-light">
+                      <tr>
+                        
+                        <th>Nombre</th>
+                        <th>Apellidos</th>
+                        <th>Fecha Nacimiento</th>
+                        <th>Peso Actual</th>
+                        <th>Categoría de Peso</th>
+                        <th>Sexo</th>
+                        <th>Competición</th>
+                        <th>Squat</th>
+                        <th>BenchPress</th>
+                        <th>Deadlift</th>
+                        <th>Operaciones</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr th:each="competidor : ${competidores}">
+                        
+                        <td th:text="${competidor.nombre}">Nombre</td>
+                        <td th:text="${competidor.apellidos}">Apellidos</td>
+                        <td th:text="${#temporals.format(competidor.fechaNacimiento)}">fechaNacimiento</td>
+                        <td th:text="${#numbers.formatDecimal(competidor.pesoActual,1,1)}">pesoActual</td>
+                        <td th:text="${#numbers.formatDecimal(competidor.categoriaPeso,0,0)}">categoriaPeso</td>
+                        <td th:text="${competidor.sexo}">sexo</td>
+                        <td th:text="${competidor.competicion.nombreCompeticion}">Campeonato de España</td>
+                        <td th:text="${#numbers.formatDecimal(competidor.squat,1,1)}">squat</td>
+                        <td th:text="${#numbers.formatDecimal(competidor.benchPress,1,1)}">bechpress</td>
+                        <td th:text="${#numbers.formatDecimal(competidor.deadlift,1,1)}">deadlift</td>
+                        <td th:text="${competidor.apellidos}">total</td>
+                        <td class="operaciones"><a href="#"
+                            th:href="@{/competidor/editar/{id}(id=${competidor.id})}"
+                            class="btn btn-primary">Editar</a>
+                            <button type="button" class="btn btn-danger" data-toggle="modal"
+                                data-target="#delete-modal" th:data-id="${competidor.id}">Borrar</button>
+                        </td>
+                      </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="delete-modal" tabindex="-1" role="dialog">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title">Borrar Competidor</h4>
+				</div>
+				<div class="modal-body">
+					<p>¿Está usted seguro de borrar este competidor?</p>
+					<button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+					<a href="/competidor/borrar/" class="btn btn-danger">Sí</a>
+				</div>
+			</div>
+
+		</div>
+	</div>
+	
+	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js"
+		th:src="@{/webjars/jquery/jquery.min.js}"></script>
+	<!-- Include all compiled plugins (below), or include individual files as needed 
+	<script
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+		th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>-->
+
+	<script src="../static/js/app.js" th:src="@{/js/app.js}"></script>
+</body>
+</html>
